@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import {PrismaClient} from '@prisma/client'
 
 interface Props {
   users: User[],
@@ -41,16 +42,8 @@ const Users = (props: Props) => {
 }
 
 export const getServerSideProps = async () => {
-  const allUsers = [
-    {
-      email: "yoshikouki@gmail.com",
-      name: "yoshikouki"
-    },
-    {
-      email: "test@gmail.com",
-      name: "test"
-    },
-  ]
+  const prisma = new PrismaClient()
+  const allUsers = await prisma.user.findMany()
   return {
     props: {
       users: allUsers,
