@@ -13,8 +13,19 @@ const handler = async  (
   res: NextApiResponse<AllUsersApiResponse>
 ) => {
   const prisma = new PrismaClient()
-  const allUsers = await prisma.user.findMany()
-  res.status(200).json(allUsers)
+  if(req.method === 'POST') {
+    const user = {
+      email: 'api@example.com',
+      name: 'api',
+    }
+    await prisma.user.create({
+      data: user
+    })
+    res.status(200).json([user])
+  } else {
+    const allUsers = await prisma.user.findMany()
+    res.status(200).json(allUsers)
+  }
 }
 
 export default handler
