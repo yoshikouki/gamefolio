@@ -18,12 +18,9 @@ const Users = (props: Props) => {
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setUsers([
-      {
-        email: email,
-        name: name,
-      },
-    ])
+    const response: Response = await fetch('http://localhost:3333/api/users')
+    const newUsers = await response.json()
+    setUsers(newUsers)
   }
 
   return (
