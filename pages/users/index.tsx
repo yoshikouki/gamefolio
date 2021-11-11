@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import {PrismaClient} from '@prisma/client'
+import React, {useState} from "react";
 
 interface Props {
   users: User[],
@@ -11,14 +12,8 @@ interface User {
 }
 
 const Users = (props: Props) => {
-  const userList = props.users.map(user => {
-    return (
-      <tr>
-        <td>{user.email}</td>
-        <td>{user.name}</td>
-      </tr>
-    )
-  })
+  const [users, setUsers] = useState(props.users)
+
   return (
     <>
       <Head>
@@ -34,7 +29,14 @@ const Users = (props: Props) => {
             <th>email</th>
             <th>name</th>
           </tr>
-          {userList}
+          {users.map(user => {
+            return (
+              <tr>
+                <td>{user.email}</td>
+                <td>{user.name}</td>
+              </tr>
+            )
+          })}
         </table>
       </main>
     </>
