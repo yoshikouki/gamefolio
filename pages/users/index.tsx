@@ -3,12 +3,13 @@ import {PrismaClient} from '@prisma/client'
 import React, {useState} from "react";
 
 interface Props {
-  users: User[],
+  users: User[]
 }
 
 interface User {
-  email: string,
-  name: string,
+  id: number
+  email: string
+  name: string
 }
 
 const Users = (props: Props) => {
@@ -63,12 +64,14 @@ const Users = (props: Props) => {
 
         <table>
           <tr>
+            <th>id</th>
             <th>email</th>
             <th>name</th>
           </tr>
           {users.map(user => {
             return (
-              <tr>
+              <tr key="users-table-row-{user.id}">
+                <td>{user.id}</td>
                 <td>{user.email}</td>
                 <td>{user.name}</td>
               </tr>
