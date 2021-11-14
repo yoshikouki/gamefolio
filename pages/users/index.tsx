@@ -1,9 +1,33 @@
 import Head from 'next/head'
 import {PrismaClient} from '@prisma/client'
-import React from "react";
-import {SignUp} from "../../components/SignUp";
+import React, {useState} from "react";
 
-const Users = () => {
+interface Props {
+  users: User[]
+}
+
+interface User {
+  id: number
+  email: string
+  name: string
+}
+
+const Users = (props: Props) => {
+  const [users, setUsers] = useState(props.users)
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify({email: email, name: name}),
+    })
+    const response = await fetch('/api/users')
+    const newUsers = await response.json()
+    setUsers(newUsers)
+  }
+
   return (
     <>
       <Head>
@@ -13,7 +37,47 @@ const Users = () => {
       </Head>
 
       <main>
-        <SignUp />
+        <h1>Users</h1>
+        <form onSubmit={submit}>
+          <div className="form-item">
+            <label>
+              メールアドレス
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="form-item">
+            <label>
+              表示名
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+          </div>
+          <input type="submit" value='作成'/>
+        </form>
+
+        <table>
+          <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>name</th>
+          </tr>
+          {users.map(user => {
+            return (
+              <tr key="users-table-row-{user.id}">
+                <td>{user.id}</td>
+                <td>{user.email}</td>
+                <td>{user.name}</td>
+              </tr>
+            )
+          })}
+        </table>
       </main>
     </>
   )
