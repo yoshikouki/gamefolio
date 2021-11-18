@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import React, {ReactNode} from 'react'
 import {styled} from "@mui/system";
+import {Typography} from "@mui/material";
+import {useRouter} from "next/router";
 
 export const DefaultLayout = (props: { title?: string; children: ReactNode }) => {
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -12,7 +15,14 @@ export const DefaultLayout = (props: { title?: string; children: ReactNode }) =>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
       </Head>
-      <Header></Header>
+      <Header>
+        <Typography
+          variant='h1'
+          onClick={async () => router.push('/')}
+        >
+          Gamefolio
+        </Typography>
+      </Header>
       <Main>{props.children}</Main>
     </>
   )
