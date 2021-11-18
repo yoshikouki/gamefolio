@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React, { ReactNode } from 'react'
+import {styled} from "@mui/system";
 
 export const DefaultLayout = (props: { title?: string; children: ReactNode }) => {
   return (
@@ -11,7 +12,18 @@ export const DefaultLayout = (props: { title?: string; children: ReactNode }) =>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
       </Head>
-      <main>{props.children}</main>
+      <Header></Header>
+      <Main>{props.children}</Main>
     </>
   )
 }
+
+const Header = styled('header')({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  padding: '1em',
+})
+
+const Main = styled('main')({
+  padding: '1em',
+})
