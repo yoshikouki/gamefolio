@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React, {ReactNode} from 'react'
 import {styled} from '@mui/system';
+import BottomNavigation from "../components/BottomNavigation";
 import TopNavigation from "../components/TopNavigation";
 
 export const DefaultLayout = (props: { title?: string; children: ReactNode }) => {
@@ -16,6 +17,7 @@ export const DefaultLayout = (props: { title?: string; children: ReactNode }) =>
 
       <TopNavigation/>
       <Main>{props.children}</Main>
+      <BottomNavigation/>
     </>
   )
 }
