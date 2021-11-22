@@ -1,26 +1,31 @@
-import {BottomNavigation as BottomNavigationMui, BottomNavigationAction} from "@mui/material";
-import {Favorite, Home} from "@mui/icons-material";
-import React from "react";
+import {BottomNavigation as BottomNavigationMui, BottomNavigationAction, Paper} from "@mui/material";
+import {Home, Person} from "@mui/icons-material";
+import React, {SyntheticEvent, useState} from "react";
+import {useRouter} from "next/router";
+import {styled} from "@mui/system";
 
 const BottomNavigation = () => {
-  const [value, setValue] = React.useState('home');
-  const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
-    setValue(newValue);
+  const router = useRouter()
+  const [value, setValue] = useState('');
+  const handleChange = async (event: SyntheticEvent, newValue: string) => {
+    setValue(newValue)
+    await router.push(newValue)
   }
   return (
-    <BottomNavigationMui sx={{width: 500}} value={value} onChange={handleChange}>
-      <BottomNavigationAction
-        label='Home'
-        value='home'
-        icon={<Home/>}
-      />
-      <BottomNavigationAction
-        label="Favorites"
-        value="favorites"
-        icon={<Favorite/>}
-      />
-    </BottomNavigationMui>
-  )
+    <ExPaper elevation={3}>
+      <BottomNavigationMui
+        value={value}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction label="Home" value='/' icon={<Home/>}/>
+        <BottomNavigationAction label="Users" value='/users' icon={<Person/>}/>
+      </BottomNavigationMui>
+    </ExPaper>)
 }
+
+const ExPaper = styled(Paper)({
+    position: 'fixed', bottom: 0, left: 0, right: 0
+  }
+)
 
 export default BottomNavigation
