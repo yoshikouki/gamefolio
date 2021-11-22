@@ -1,5 +1,4 @@
-import {BottomNavigation as BottomNavigationMui, BottomNavigationAction, Link} from "@mui/material";
-import {Favorite, Home} from "@mui/icons-material";
+import {Link} from "@mui/material";
 import React from "react";
 import {styled} from "@mui/system";
 
