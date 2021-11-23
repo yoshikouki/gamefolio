@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
   render() {
@@ -9,8 +9,8 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
         </Head>
         <body>
-        <Main />
-        <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     )

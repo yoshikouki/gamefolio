@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import {PrismaClient} from '@prisma/client'
-import React, {useState} from "react";
+import { PrismaClient } from '@prisma/client'
+import React, { useState } from 'react'
 
 interface Props {
   users: User[]
@@ -21,7 +21,7 @@ const Users = (props: Props) => {
     event.preventDefault()
     await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({email: email, name: name}),
+      body: JSON.stringify({ email: email, name: name }),
     })
     const response = await fetch('/api/users')
     const newUsers = await response.json()
@@ -59,7 +59,7 @@ const Users = (props: Props) => {
               />
             </label>
           </div>
-          <input type="submit" value='作成'/>
+          <input type="submit" value="作成"/>
         </form>
 
         <table>
@@ -89,7 +89,7 @@ export const getServerSideProps = async () => {
   return {
     props: {
       users: allUsers,
-    }
+    },
   }
 }
 

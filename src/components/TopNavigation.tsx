@@ -1,15 +1,15 @@
-import {Link} from "@mui/material";
-import React from "react";
-import {styled} from "@mui/system";
+import { Link } from '@mui/material'
+import React from 'react'
+import { styled } from '@mui/system'
 
 const TopNavigation = () => {
   return (
     <Header>
       <Link
-        href='/'
-        component='h1'
-        variant='h3'
-        underline='hover'
+        href="/"
+        component="h1"
+        variant="h3"
+        underline="hover"
       >
         G
       </Link>

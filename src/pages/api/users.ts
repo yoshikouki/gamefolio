@@ -1,5 +1,5 @@
-import type {NextApiRequest, NextApiResponse} from 'next'
-import {PrismaClient} from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { PrismaClient } from '@prisma/client'
 
 type AllUsersApiResponse = User[]
 
@@ -10,7 +10,7 @@ interface User {
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<AllUsersApiResponse>
+  res: NextApiResponse<AllUsersApiResponse>,
 ) => {
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
@@ -19,7 +19,7 @@ const handler = async (
       email: params.email,
       name: params.name,
     }
-    await prisma.user.create({data: user})
+    await prisma.user.create({ data: user })
     res.status(200).json([user])
   } else {
     const allUsers = await prisma.user.findMany()
