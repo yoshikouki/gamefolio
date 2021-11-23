@@ -1,6 +1,6 @@
-import Head from 'next/head'
 import { PrismaClient } from '@prisma/client'
 import React, { useState } from 'react'
+import { DefaultLayout } from '../../layouts/default'
 
 interface Props {
   users: User[]
@@ -29,57 +29,49 @@ const Users = (props: Props) => {
   }
 
   return (
-    <>
-      <Head>
-        <title>ユーザー一覧</title>
-        <meta name="description" content="ユーザー一覧"/>
-        <link rel="icon" href="/favicon.ico"/>
-      </Head>
+    <DefaultLayout title="ユーザー一覧">
+      <h1>Users</h1>
+      <form onSubmit={submit}>
+        <div className="form-item">
+          <label>
+            メールアドレス
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="form-item">
+          <label>
+            表示名
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+        </div>
+        <input type="submit" value="作成"/>
+      </form>
 
-      <main>
-        <h1>Users</h1>
-        <form onSubmit={submit}>
-          <div className="form-item">
-            <label>
-              メールアドレス
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="form-item">
-            <label>
-              表示名
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-          </div>
-          <input type="submit" value="作成"/>
-        </form>
-
-        <table>
-          <tr>
-            <th>id</th>
-            <th>email</th>
-            <th>name</th>
-          </tr>
-          {users.map(user => {
-            return (
-              <tr key="users-table-row-{user.id}">
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.name}</td>
-              </tr>
-            )
-          })}
-        </table>
-      </main>
-    </>
+      <table>
+        <tr>
+          <th>id</th>
+          <th>email</th>
+          <th>name</th>
+        </tr>
+        {users.map(user => {
+          return (
+            <tr key="users-table-row-{user.id}">
+              <td>{user.id}</td>
+              <td>{user.email}</td>
+              <td>{user.name}</td>
+            </tr>
+          )
+        })}
+      </table>
+    </DefaultLayout>
   )
 }
 
