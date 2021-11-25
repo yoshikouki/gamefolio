@@ -13,6 +13,13 @@ const TopNavigation = () => {
       >
         G
       </Link>
+      <Link
+        href="/login"
+        variant="body1"
+        underline="hover"
+      >
+        ログイン
+      </Link>
     </Header>
   )
 }
